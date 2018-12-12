@@ -36,7 +36,7 @@ def sacar_promedio(array_of_hashes)
         array_of_hashes[x][:grades].map {|w| w == ' A' ? 1 : w }
         int_grades =  array_of_hashes[x][:grades].map {|z| z.to_f}
         grades_qua = array_of_hashes[x][:grades].length
-        promedio = int_grades.inject(0) {|sum,n| sum + n /grades_qua }
+        promedio = int_grades.inject(0) {|sum,n| sum + n /grades_qua }.round(2)
         # esto saca el contenido
         content += "#{name}: #{promedio} \n" 
     end
@@ -52,9 +52,6 @@ def make_file(array_of_hashes)
 end
 
 # make_file(all_data_student_hash)
-
-
-
 
 def ausentes(array_of_hashes)
     array_of_hashes.each_index do |x|
@@ -84,11 +81,6 @@ end
 
 
 
-
-
-
-
-
 def program_init()
     puts "Programa notas de estudiantes"
     puts "Ingrese un número del 1 al 4 para seleccionar su acción"
@@ -102,18 +94,20 @@ end
 
 
 
-# option = 0
-# while option != 4
-#   program_init()
-#    option = gets.chomp.to_i
-#     case option
-#         when 1
-#           sacar_promedio(all_data_student_hash)
-#         when 2
-#            ausentes(all_data_student_hash)
-#         when 3
-#             aprovados(all_data_student_hash, nil)
-#         else
-#             puts "Opción invalida!"
-#     end
-# end
+option = 0
+while option != 4
+  program_init()
+   option = gets.chomp.to_i
+    case option
+        when 1
+          make_file(all_data_student_hash)
+        when 2
+           ausentes(all_data_student_hash)
+        when 3
+            aprovados(all_data_student_hash, nil)
+        when 4
+            puts "Saliendo..."
+        else
+            puts "Opción invalida!"
+    end
+end
