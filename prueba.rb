@@ -29,6 +29,7 @@ all_data_student_hash = create_epic_array_of_hashes(students_array)
 
 
 def sacar_promedio(array_of_hashes)
+    # esto saca el contenido
     content = ''
     array_of_hashes.each_index do |x|
         name = array_of_hashes[x][:name]
@@ -36,12 +37,12 @@ def sacar_promedio(array_of_hashes)
         int_grades =  array_of_hashes[x][:grades].map {|z| z.to_f}
         grades_qua = array_of_hashes[x][:grades].length
         promedio = int_grades.inject(0) {|sum,n| sum + n /grades_qua }
+        # esto saca el contenido
         content += "#{name}: #{promedio} \n" 
     end
+    # esto saca el contenido
     return content
 end
-
-
 
 def make_file(array_of_hashes)
     content = sacar_promedio(array_of_hashes)
@@ -50,7 +51,7 @@ def make_file(array_of_hashes)
     file.close
 end
 
-make_file(all_data_student_hash)
+# make_file(all_data_student_hash)
 
 
 
@@ -64,8 +65,24 @@ def ausentes(array_of_hashes)
 end
 
 def aprovados(array_of_hashes, nota_aprov)
-
+    puts "Ingresar nota minima de aprovación"
+    nota_aprov = gets.chomp.to_i
+    nota_aprov = 5 if nota_aprov == nil
+    array_of_hashes.each_index do |x|
+        name = array_of_hashes[x][:name]
+        array_of_hashes[x][:grades].map {|w| w == ' A' ? 1 : w }
+        int_grades =  array_of_hashes[x][:grades].map {|z| z.to_f}
+        grades_qua = array_of_hashes[x][:grades].length
+        promedio = int_grades.inject(0) {|sum,n| sum + n /grades_qua }
+        if nota_aprov <= promedio
+           puts "#{name}, fue aprovado :)"
+        else
+            puts "#{name}, no aprovo :("
+        end
+    end
 end
+
+
 
 
 
@@ -95,10 +112,8 @@ end
 #         when 2
 #            ausentes(all_data_student_hash)
 #         when 3
-#             print "en desarrollo"
+#             aprovados(all_data_student_hash, nil)
 #         else
 #             puts "Opción invalida!"
 #     end
 # end
-
-
