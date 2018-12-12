@@ -29,18 +29,25 @@ all_data_student_hash = create_epic_array_of_hashes(students_array)
 
 
 def sacar_promedio(array_of_hashes)
+    content = ''
     array_of_hashes.each_index do |x|
         name = array_of_hashes[x][:name]
         array_of_hashes[x][:grades].map {|w| w == ' A' ? 1 : w }
         int_grades =  array_of_hashes[x][:grades].map {|z| z.to_f}
         grades_qua = array_of_hashes[x][:grades].length
         promedio = int_grades.inject(0) {|sum,n| sum + n /grades_qua }
-        content = "#{name}: #{promedio}"
-        file = File.open("promedios.csv", 'a')
-        file.puts content
-        file.close
+        content += "#{name}: #{promedio} \n" 
     end
+    return content
 end
+
+def make_file(array_of_hashes)
+end
+
+print sacar_promedio(all_data_student_hash)
+
+
+
 
 def ausentes(array_of_hashes)
     array_of_hashes.each_index do |x|
@@ -49,7 +56,10 @@ def ausentes(array_of_hashes)
         puts "#{name} tiene: #{a} ausencias."
     end   
 end
-ausentes(all_data_student_hash)
+
+def aprovados(array_of_hashes, nota_aprov)
+
+end
 
 
 
@@ -77,7 +87,9 @@ end
 #         when 1
 #           sacar_promedio(all_data_student_hash)
 #         when 2
+#            ausentes(all_data_student_hash)
 #         when 3
+#             print "en desarrollo"
 #         else
 #             puts "Opción invalida!"
 #     end
