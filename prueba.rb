@@ -41,10 +41,16 @@ def sacar_promedio(array_of_hashes)
     return content
 end
 
+
+
 def make_file(array_of_hashes)
+    content = sacar_promedio(array_of_hashes)
+    file = File.open('promedio.csv', 'a')
+    file.puts content
+    file.close
 end
 
-print sacar_promedio(all_data_student_hash)
+make_file(all_data_student_hash)
 
 
 
